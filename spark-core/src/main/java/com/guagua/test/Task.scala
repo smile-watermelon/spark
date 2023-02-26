@@ -2,12 +2,13 @@ package com.guagua.test
 
 class Task extends Serializable {
 
-  val datas = List(1, 2, 3, 4)
+  var datas: List[Int] = _
 
-  val logic: Int => Int = _ * 2
+  var logic: (Int) => Int = _
 
   def compute(): List[Int] = {
     datas.map(logic)
   }
+
 
 }
