@@ -3,6 +3,10 @@ package com.guagua.wc
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext, rdd}
 
+
+/**
+ * ./bin/spark-submit --class org.apache.spark.examples.SparkPi --master spark://hadoop-01:7077 ./examples/jars/spark-examples_2.12-3.2.3.jar 10
+ */
 object Spark03_WordCount {
 
   def main(args: Array[String]): Unit = {
