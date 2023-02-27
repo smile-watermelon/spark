@@ -16,6 +16,7 @@ object Spark01_RDD_Operator_Transform_par {
      * 只有前面一个数据的逻辑全部执行完成后，才会执行下一个数据
      * 分区内数据的执行是有序的
      *  2、不同分区的计算是无序的
+     *  3、map 转换后的数据分区不会变
      */
     val rdd: RDD[Int] = sc.makeRDD(List(1, 2, 3, 4),2)
 
