@@ -3,28 +3,20 @@ package com.guagua.rdd.operator
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
-object Spark02_RDD_Operator_Transform_Test {
+object Spark04_RDD_Operator_Transform1 {
 
   def main(args: Array[String]): Unit = {
     val sparkConf: SparkConf = new SparkConf()
     sparkConf.setMaster("local[*]").setAppName("RDD")
     val sc: SparkContext = new SparkContext(sparkConf)
 
-    val rdd: RDD[Int] = sc.makeRDD(List(1, 2, 3, 4), 2)
+    val rdd: RDD[String] = sc.makeRDD(List("hello world", "hello spark"))
 
-
-    /**
-     * 获取指定分区的数据
-     */
-    val mapRDD: RDD[Int] = rdd.mapPartitionsWithIndex((index, iter) => {
-      if (index == 1) {
-        iter
-      } else {
-        Nil.iterator
-      }
+    val flatRDD: RDD[String] = rdd.flatMap(str => {
+      str.split(" ")
     })
 
-    mapRDD.collect().foreach(println)
+    flatRDD.collect().foreach(println)
 
     sc.stop()
   }

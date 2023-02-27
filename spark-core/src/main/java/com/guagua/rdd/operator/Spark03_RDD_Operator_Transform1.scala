@@ -3,7 +3,7 @@ package com.guagua.rdd.operator
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
-object Spark02_RDD_Operator_Transform_Test {
+object Spark03_RDD_Operator_Transform1 {
 
   def main(args: Array[String]): Unit = {
     val sparkConf: SparkConf = new SparkConf()
@@ -12,17 +12,15 @@ object Spark02_RDD_Operator_Transform_Test {
 
     val rdd: RDD[Int] = sc.makeRDD(List(1, 2, 3, 4), 2)
 
-
     /**
-     * 获取指定分区的数据
+     * 分区和数据映射
      */
-    val mapRDD: RDD[Int] = rdd.mapPartitionsWithIndex((index, iter) => {
-      if (index == 1) {
-        iter
-      } else {
-        Nil.iterator
-      }
+    val mapRDD: RDD[(Int, Int)] = rdd.mapPartitionsWithIndex((index, iter) => {
+      iter.map(num => {
+        (index, num)
+      })
     })
+
 
     mapRDD.collect().foreach(println)
 
