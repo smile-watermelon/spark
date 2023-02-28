@@ -55,7 +55,7 @@ object Spark20_Operator_Transform {
     rdd.foldByKey(0)(_+_)
     rdd combineByKey(
       v => (v, 1),
-      (t: (Int, Int), v) => t._1 + v,
+      (t: (Int, Int), v) => (t._1 + v, t._2 + 1),
       (t1: (Int, Int), t2: (Int, Int)) => (t1._1 + t2._1, t1._2 + t2._2)
     )
 
