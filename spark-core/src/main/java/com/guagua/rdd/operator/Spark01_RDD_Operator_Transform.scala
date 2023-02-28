@@ -10,7 +10,9 @@ object Spark01_RDD_Operator_Transform {
     sparkConf.setMaster("local[*]").setAppName("RDD")
     val sc: SparkContext = new SparkContext(sparkConf)
 
-
+    /**
+     * 获取apache.log 日志中的 url
+     */
     val url: RDD[String] = sc.textFile("data/apache.log").map(line => {
       val fields: Array[String] = line.split(" ")
       val length: Int = fields.length
