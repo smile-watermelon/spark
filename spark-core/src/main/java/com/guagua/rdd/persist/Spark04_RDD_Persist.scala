@@ -10,10 +10,14 @@ object Spark04_RDD_Persist {
    * ToDo cache, persist，checkpoint的区别
    *
    * cache: 数据保存在内存中，速度快，但不安全
-   * persist: 数据保存在磁盘文件中，更安全，但job 执行完成后会删除保存的临时文件
-   * checkpoint：数据保存在指定的文件路径中，job执行完成后，不会删除文件
-   *             单独使用checkpoint 作业会计算两次，运行速度慢，一般会和 cache 联合使用
+   *        会在血缘关系中添加新的依赖，一旦出现问题可以，重头读取数据
    *
+   * persist: 数据保存在磁盘文件中，更安全，但job 执行完成后会删除保存的临时文件
+   *
+   *  checkpoint：数据保存在指定的文件路径中，job执行完成后，不会删除文件
+   *             单独使用checkpoint 作业会计算两次，运行速度慢，一般会和 cache 联合使用
+   *             在执行过程中，会切断血缘关系，会重新建立新的血缘关系
+   *             checkpoint等同于改变数据源
    */
   def main(args: Array[String]): Unit = {
     val sparkConf = new SparkConf().setMaster("local").setAppName("wordCount")
@@ -43,10 +47,6 @@ object Spark04_RDD_Persist {
 
 
     println("--------------")
-
-    val groupRDD: RDD[(String, Iterable[Int])] = mapRDD.groupByKey()
-
-    groupRDD.collect().foreach(println)
 
 
     sc.stop()
