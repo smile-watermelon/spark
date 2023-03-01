@@ -26,3 +26,5 @@ spark.iml
 */target
 */spark-core.iml
 output
+data/user-kryo.txt
+data/user.txt
