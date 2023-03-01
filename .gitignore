@@ -28,3 +28,4 @@ spark.iml
 output
 data/user-kryo.txt
 data/user.txt
+checkpoint
