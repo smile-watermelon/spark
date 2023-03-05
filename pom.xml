@@ -53,6 +53,13 @@
         </dependency>
     </dependencies>
 
+    <repositories>
+        <repository>
+            <id>spring</id>
+            <url>https://maven.aliyun.com/repository/spring</url>
+        </repository>
+    </repositories>
+
     <build>
         <plugins>
             <!-- 该插件用于将 Scala 代码编译成 class 文件 -->
